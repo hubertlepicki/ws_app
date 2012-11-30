@@ -1,32 +1,36 @@
 WsApp::Application.routes.draw do
+ 
   get "static_pages/contact"
-
   get "static_pages/home"
-
   get "static_pages/help"
   get "static_pages/about"
 
+  match '/about', to: 'static_pages#about'
+  match '/help', to: 'static_pages#help'
+  match '/contact', to: 'static_pages#contact'  
+  match '/', to: 'static_pages#home'
+
   resources :microposts
-
-
   resources :users
 
+  root :to => 'static_pages#home'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
+  
   # Keep in mind you can assign values other than :controller and :action
-
   # Sample of named route:
+  
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
-
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-
+  
   # Sample resource route with options:
+  
   #   resources :products do
   #     member do
   #       get 'short'
