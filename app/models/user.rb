@@ -1,4 +1,3 @@
-#
 #  == Schema Information
 #
 #  Table name: users
@@ -9,7 +8,6 @@
 #
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#
 
 class User < ActiveRecord::Base
   
@@ -17,12 +15,14 @@ class User < ActiveRecord::Base
 
   before_save {|user| user.email = email.downcase}
 
-  validates :name, presence: true, lenght: {maximum: 5} 
+  validates :name, presence: true, length: {maximum: 5} 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: true
 
-  validates :password, presence: true, lenght: {minimum: 6}
+  validates :password, presence: true, length: {minimum: 6}
   validates :password_confirmation, presence: true
+
+  has_secure_password
 
 end
